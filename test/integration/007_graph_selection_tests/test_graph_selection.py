@@ -362,11 +362,11 @@ class TestGraphSelection(DBTIntegrationTest):
         assert len(results) == 2
         assert sorted(results) == ['source:test.raw.seed', 'test.reports.seed_ml_report']
 
-        results = self.run_dbt(['ls', '--select', '1+test.reports.email_reports'])
+        results = self.run_dbt(['ls', '--select', '1+test.reports.user_report'])
         assert len(results) == 3
-        assert sorted(results) == ['test.emails', 'test.reports.email_reports', 'test.users_rollup']
+        assert sorted(results) == ['test.reports.user_report', 'test.users', 'test.users_rollup']
 
-        self.run_dbt(['run', '-m', '+test.reports.email_reports'])
+        self.run_dbt(['run', '-m', '+test.reports.user_report'])
         # users, users_rollup
         assert len(results) == 3
 
